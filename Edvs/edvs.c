@@ -10,7 +10,7 @@
 #include <errno.h>
 
 #define EDVS_LOG_MESSAGE
-#define EDVS_LOG_VERBOSE
+//#define EDVS_LOG_VERBOSE
 // #define EDVS_LOG_ULTRA
 
 // ----- ----- ----- ----- ----- ----- ----- ----- ----- //
@@ -549,7 +549,9 @@ ssize_t edvs_device_streaming_read(edvs_device_streaming_t* s, edvs_event_t* eve
 		if((a & cHighBitMask) == 0) { // check that the high bit of first byte is 1
 			// the serial port missed a byte somewhere ...
 			// skip one byte to jump to the next event
+#ifdef EDVS_LOG_VERBOSE
 			printf("Error in high bit! Skipping a byte\n");
+#endif
 			i --;
 			continue;
 		}
